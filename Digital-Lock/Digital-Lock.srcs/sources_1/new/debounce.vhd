@@ -21,7 +21,9 @@ architecture Behavioral of debounce is
 signal FF1, FF2, FF3: std_logic;
 signal counter:integer:=0;
 constant stable_time: integer:=1250000; -- FPGA Clock: 125 Mhz -> 8 ns. Button press 10ms/8ns = 1250000
+--constant stable_time:integer:=1;
 signal enable: std_logic:='0';
+signal result: std_logic:='0';
 
 begin
 
@@ -32,19 +34,22 @@ begin
 if (rising_edge(clk)) then
     FF1<=button_in;
     FF2<=FF1;
-    
-    if ((FF1 xor FF2) = '1' and counter=0) then
-        counter<=counter+1;
-        enable<='0';
-    elsif (counter >= stable_time) then
+    if ((FF1 xor FF2) = '1' and enable='0') then
         counter<=0;
+    elsif (counter >= stable_time) then
         enable<='1';
     else
         counter<=counter+1;
+        
     end if;
+    
         if (enable='1') then
             FF3<=FF2;
-        
+            enable<='0';
+            counter<=0;
+        else
+            FF3<='0';
+
         end if;
     
     end if;

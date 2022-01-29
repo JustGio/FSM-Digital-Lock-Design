@@ -41,9 +41,9 @@ uut: fsm port map (clk=>clk_tb, button_n=>button_n,button_e=>button_e, button_s=
 process
 begin
 clk_tb<='0';
-wait for 5 ns;
+wait for 4 ns;
 clk_tb<='1';
-wait for 5 ns;
+wait for 4 ns;
 
 end process;
 
@@ -51,24 +51,24 @@ end process;
 process
 begin
 button_s<='1';
-wait for 10 ns;
+wait for 11 ms;
 button_s<='0';
-wait for 20 ns;
+wait for 20 ms;
 
 button_w<='1';
-wait for 10 ns;
+wait for 12 ms;
 button_w<='0';
-wait for 20 ns;
+wait for 20 ms;
 
 button_e<='1';
-wait for 10 ns;
+wait for 11 ms;
 button_e<='0';
-wait for 20 ns;
+wait for 20 ms;
 button_w <= '1';
-wait for 10 ns;
+wait for 11 ms;
 
 button_w <= '0';
-wait for 20 ns;
+wait for 20 ms;
 
 wait;
 end process;
