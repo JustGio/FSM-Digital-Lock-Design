@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri Jan 28 16:04:15 2022
+# Process ID: 8176
+# Current directory: C:/Users/Owner/Documents/HDL/VHDL/Lab-524/FSM-Digital-Lock-Design/Digital-Lock/Digital-Lock.runs/impl_1
+# Command line: vivado.exe -log fsm.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source fsm.tcl -notrace
+# Log file: C:/Users/Owner/Documents/HDL/VHDL/Lab-524/FSM-Digital-Lock-Design/Digital-Lock/Digital-Lock.runs/impl_1/fsm.vdi
+# Journal file: C:/Users/Owner/Documents/HDL/VHDL/Lab-524/FSM-Digital-Lock-Design/Digital-Lock/Digital-Lock.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source fsm.tcl -notrace
