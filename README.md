@@ -11,7 +11,7 @@ The Digital Lock that is designed in this project uses an FSM moore machine. The
 ```10ms/8ns = 1,250,000```
 
 ## Results
-### Correct combination of the digital lock is testbenched below.
+### Correct combination of the digital lock is testbenched below (debounced button output can also be seen).
 ![Unlocked](img/Lock_Sim_Unlock_1.PNG)
 ### Once unlocked, the lock is reset and locked again. Alarm sequence is tested with the incorrect and correct reset sequence.
 ![AlarmLock1](img/Lock_Sim_Unlock_LockReset_Alarm.PNG)
@@ -32,4 +32,4 @@ The Digital Lock that is designed in this project uses an FSM moore machine. The
 ![Distr](img/report_slice_logic_distr_2.PNG)
 
 ## Conclusion
-Overall, the FSM designed works for every state. In order to be able to be able to flash the LED's on the board, a clock divider must be implemented in order to slow down the rate of the LED's and would be visible to the human eye.
+Overall, the FSM designed works for every state. In order to able to flash the LED's on the board, a clock divider must be implemented (updating soon) in order to slow down the rate of the LED's and would be visible to the human eye.
