@@ -68,7 +68,7 @@ begin
                 next_state <= S1;
             elsif (button_e_out = '1') then
                 next_state <= R1;
-            elsif (button_n_out = '1' or button_w_out = '1') then
+            elsif ((button_n_out = '1') or (button_w_out = '1')) then
                 next_state <= W1;
             end if;
         when S1 =>
@@ -76,13 +76,13 @@ begin
                 next_state <= S2;
              elsif (button_e_out = '1') then
                 next_state <= R2;
-             elsif (button_n_out = '1' or button_s_out = '1') then
+             elsif ((button_n_out = '1') or (button_s_out = '1')) then
                 next_state <= W2;
              end if;   
         when S2 =>
             if (button_e_out = '1') then
                 next_state <= S3;
-            elsif (button_n_out = '1' or button_s_out = '1' or button_w_out = '1') then
+            elsif ((button_n_out = '1') or (button_s_out = '1') or (button_w_out = '1')) then
                 next_state <= W3;
            
              end if;
@@ -95,45 +95,43 @@ begin
          when W1 =>
             if (button_e_out = '1') then
                 next_state<= R2;
-            elsif (button_n_out = '1' or button_s_out = '1' or button_w_out = '1') then
+            elsif ((button_n_out = '1') or (button_s_out = '1') or (button_w_out = '1')) then
                 next_state <= W2;
             end if;
         when W2 =>
             if (button_e_out = '1') then
                 next_state <= R3;
-            elsif (button_n_out = '1' or button_s_out = '1' or button_w_out = '1') then
+            elsif ((button_n_out = '1') or (button_s_out = '1') or (button_w_out = '1')) then
                 next_state <= W3;
             end if;
         when W3 =>
-            if (button_n_out = '1' or button_e_out = '1' or button_s_out = '1' or button_w_out = '1') then
+            if ((button_n_out = '1') or (button_e_out = '1') or (button_s_out = '1') or (button_w_out = '1')) then
                    next_state <= Alarm;
              end if;
          when R1 =>
             if (button_e_out = '1') then
                 next_state <= Reset;
-            elsif (button_n_out = '1' or button_s_out = '1' or button_w_out = '1') then
+            elsif ((button_n_out = '1') or (button_s_out = '1') or (button_w_out = '1')) then
                 next_state <= W2;
                 
             end if;
          when R2 =>
             if (button_e_out = '1') then
                 next_state <= Reset;
-            elsif (button_n_out = '1' or button_s_out = '1' or button_w_out = '1') then
+            elsif ((button_n_out = '1') or (button_s_out = '1') or (button_w_out = '1')) then
                 next_state <= W3;
                 
             end if;
          when R3 =>
             if (button_e_out = '1') then
                 next_state <= Reset;
-            elsif (button_n_out = '1' or button_s_out = '1' or button_w_out = '1') then
-                next_state <= Alarm;
-                
-                
+            elsif ((button_n_out = '1') or (button_s_out = '1') or (button_w_out = '1')) then
+                next_state <= Alarm;    
             end if;
          when A1 =>
             if (button_e_out = '1') then
                 next_state <= Reset;
-            elsif (button_n_out = '1' or button_s_out = '1' or button_w_out = '1') then
+            elsif ((button_n_out = '1') or (button_s_out = '1') or (button_w_out = '1')) then
                 next_state <= Alarm;
             end if;
          when Alarm =>
@@ -143,8 +141,8 @@ begin
          when Reset =>
             next_state<=LOCK;
         when Unlock=>
-            if (button_n_out = '1' or button_e_out = '1' or button_s_out = '1' or button_w_out = '1') then
-                next_state <= LOCK;
+            if ((button_n_out = '1') or (button_e_out = '1') or (button_s_out = '1') or (button_w_out = '1')) then
+                next_state <= Reset;
             end if;
         end case;
     end if;
@@ -156,23 +154,23 @@ task: process(clk) --control LED's and flags
 begin
 
 if (rising_edge(clk)) then
-if (current_state=S1 or current_state=W1 or current_state=R1) then
-    led0<='1';
-elsif (current_state=LOCK or current_state=A1) then
+if ((current_state=LOCK)) then
     led0<='0';
     led1<='0';
     led2<='0';
-elsif (current_state=S2 or current_state=W2 or current_state=R2) then
+elsif ((current_state=S1) or (current_state=W1) or (current_state=R1)) then
+    led0<='1';
+elsif ((current_state=S2) or (current_state=W2) or (current_state=R2)) then
     led1<='1';
-elsif (current_state=W3 or current_state=S3 or current_state=R3) then
+elsif ((current_state=W3) or (current_state=S3) or (current_state=R3)) then
     led2<='1';
 elsif (current_state=Alarm) then
     if (alarm_flag='0') then
       alarm_flag<='1';
       led1<='0';
    else
-        alarm_led(2)<= not alarm_led(2);
-        alarm_led(0)<= not alarm_led(0);
+--        alarm_led(2)<= not alarm_led(2);
+--        alarm_led(0)<= not alarm_led(0);
         led0<=alarm_led(0);
         led2<=alarm_led(2);
    end if;
@@ -182,7 +180,7 @@ elsif (current_state=Unlock) then
         led1<='0';
         led2<='0';
     else
-        flash_led(0) <= not flash_led(0);
+--        flash_led(0) <= not flash_led(0);
         led0<=flash_led(0);
      end if;
 elsif (current_state=Reset) then
